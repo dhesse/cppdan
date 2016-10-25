@@ -1,0 +1,18 @@
+apply plugin: 'cpp'
+
+model {
+  components {
+    utest(NativeLibrarySpec) {
+    }
+    cppdan(NativeLibrarySpec) {
+    }
+    test(NativeExecutableSpec) {
+      sources {
+        cpp.lib library: 'utest', linkage: 'api'
+        cpp.lib library: 'cppdan', linkage: 'api'
+      }
+    }
+  }
+  binaries { all { cppCompiler.args '--std=c++11'
+                   cppCompiler.args '-g' } }
+}
